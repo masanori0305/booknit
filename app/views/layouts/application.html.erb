@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Booknit</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Pinyon+Script" rel="stylesheet">
+</head>
+<body>
+  <header>
+       <div class="heading">
+           <h1>BooKnit</h1>
+      </div>
+  </header>
+
+<header>
+
+
+
+
+    <ul class="nav nav-pills">
+        <li class="active"><a href="/">Timeline</a></li>
+        <li><a href="#">Trend</a></li>
+
+     <% if user_signed_in? %>
+        <li><%= link_to "投稿する", new_book_path, class: 'post'%></li>
+        <li><%= link_to "検索する", books_search_path, class: 'post'%></li>
+        <li class="entry_button" style="float: right">
+        <%= link_to "Sign out", destroy_user_session_path, id: "sign_out" ,method: :delete%></li>
+        <li class="entry_button" style="float: right">
+        <%= link_to "マイページ", "/users/#{current_user.id}" %></li>
+    <% else %>
+        <li class="entry_button" style="float: right"><%= link_to "新規登録", new_user_registration_path, class: 'post' %></li>
+        <li class="entry_button" style="float: right">
+         <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></li>
+      <% end %>
+    </ul>
+
+  </header>
+
+
+
+<%= yield %>
+
+</body>
+</html>

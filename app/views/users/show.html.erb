@@ -1,0 +1,17 @@
+<div class="contents clearfix">
+ <h3><%= @nickname %>さんの投稿一覧</h3>
+  <% @books.each do |book| %>
+       <article class="book_container">
+          <div class="book_image"><img src=<%= book.image %> /></div>
+            <div class="text">
+            <a href="/books/<%=book.id%>}">
+              <h4><%= book.title %></h4>
+             </a>
+            <div class="wrap">
+                <h5>[満足度]</h5>
+              <span class="rate rate<%=book.rate%>"></span>
+            </div>
+             <p><%= book.review %> <a href="/books/<%=book.id%>">...続きを読む</a></p>
+       </article>
+    <%end%>
+</div>

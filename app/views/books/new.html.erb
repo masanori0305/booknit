@@ -1,0 +1,33 @@
+<div class="contents">
+<div>
+  <%= form_tag('/books', method: :post) do %>
+    <h2 class=category_title>
+      New Post
+    </h2>
+    <ul>
+    <li><input placeholder="本のタイトル" type="text" name="title"></li>
+    <li><input placeholder="著者名" type="text" name="auther"></li>
+    <li><input placeholder="ジャンル" type="text" name="ganre"></li>
+    <li><input placeholder="Image Url" type="text" name="image"></li>
+    <li class="evaluation">
+          <input id="star1" type="radio" name="star" value="5" />
+          <label for="star1"><span class="text">人生変わった</span>★</label>
+          <input id="star2" type="radio" name="star" value="4" />
+          <label for="star2"><span class="text">満足</span>★</label>
+          <input id="star3" type="radio" name="star" value="3" />
+          <label for="star3"><span class="text">興味あり</span>★</label>
+          <input id="star4" type="radio" name="star" value="2" />
+          <label for="star4"><span class="text">ふつ〜</span>★</label>
+          <input id="star5" type="radio" name="star" value="1" />
+          <label for="star5"><span class="text">しょっぼ</span>★</label>
+    </li>
+    <li><textarea cols="30" name="review" placeholder="要約・感想など" rows="10"></textarea></li>
+    <li><input type="submit" value="SENT"></li>
+    </ul>
+  <% end %>
+  </div>
+</div>
+
+
+
+<p> <%= @title %> </p>

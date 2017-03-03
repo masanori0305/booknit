@@ -1,0 +1,33 @@
+<div class="contents clearfix">
+  <article class="book_container">
+           <div class="book_image"><img src="<%= @book.image %>"></div>
+            <div class="text">
+              <h4><%= @book.title %></h4>
+              <p><%= @book.review %></p>
+              <p>by <a href="/users/<%=@book.user.id%>"><%=@book.user.nickname%></a></p>
+            </div>
+       </article>
+
+   <div class = "comment_form">
+    <% if current_user %>
+      <%= form_tag("/books/#{@book.id}/comments", method: :post) do %>
+        <textarea cols="30" name="text" placeholder="コメントする" rows="2"></textarea>
+        <input type="submit" value="SENT">
+      <% end %>
+    <% end %>
+  </div>
+
+
+  <div class = "comments">
+      <h4>＜コメント一覧＞</h4>
+      <% if @comments %>
+        <% @comments.each do |comment| %>
+          <p>
+            <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+            <%= comment.text %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
+
+</div>

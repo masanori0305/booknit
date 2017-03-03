@@ -1,0 +1,288 @@
+
+body {
+  font-size: 14px;
+  color: #552b00;
+  margin: 0 auto;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+}
+
+
+
+header{
+  margin: 0;
+}
+
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  max-height: 400px;
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)), url(img/books.jpg);
+  background-position: center;
+  background-size: cover;
+  color: var(--text-bright-color);
+  text-align: center;
+}
+
+.heading h1 {
+  margin: auto;
+  font-family: 'Pinyon Script', cursive;
+  font-size: 7vw;
+  letter-spacing: 0.2em;
+  margin-left: 0.2em;
+  color:white;
+}
+.nav{
+  background-color:white;
+}
+
+
+
+.contents {
+  background-color: white;
+}
+
+.category_title {
+font-family: 'Pinyon Script', cursive;
+margin: 20px 30px;
+border-left:5px solid #552b00;
+padding:3px 15px;
+background-color:#FFF;
+}
+
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+
+.book_container {
+  position:relative;
+  width: 46%;
+  height: 300px;
+  float:left;
+  margin: 20px 30px;
+  background-color:white ;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+.book_container {
+      box-shadow: 0 10px 6px -6px #777777;
+  }
+.book_image {
+  width:28%;
+  background-position: center;
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+  overflow: hidden; /* 不要部分を消す */
+  padding: 6px; /* 6px だけは写真からはみ出す */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.book_image img {
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height:280px;
+}
+.book_image:before,
+.book_image:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 97px;
+  height: 50px;
+  background: white; /* 景色 */
+  transform: rotate(-30deg);
+}
+/* 左上 */
+.book_image:before {
+  box-shadow: 0 10px 8px -12px rgba(0, 0, 0, 0.8);
+  top: -24px;
+  bottom: auto;
+  right: auto;
+  left: -26px;
+
+}
+/* 右下 */
+.book_image:after {
+  box-shadow: 0 -10px 10px -10px rgba(0, 0, 0, 0.7);
+  top: auto;
+  bottom: -22px;
+  right: -25px;
+  left: auto;
+}
+
+.text {
+  position:absolute;
+  display: inline-block;
+  color:black;
+
+}
+
+.text h4 {
+  font-size: 18px;
+}
+
+.text p{
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/*rate*/
+.rate {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 16px;
+  font-size: 16px;
+}
+.rate:before, .rate:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '★★★★★';
+  display: inline-block;
+  height: 16px;
+  line-height: 16px;
+}
+.rate:before {
+  color: #ddd;
+}
+.rate:after {
+  color: #ffa500;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.rate0:after {
+  width: 0;
+}
+
+.rate1:after {
+  width: 16px;
+}
+
+
+.rate2:after {
+  width: 32px;
+}
+
+
+.rate3:after {
+  width: 48px;
+}
+
+
+.rate4:after {
+  width: 64px;
+}
+
+
+.rate5:after {
+  width: 80px;
+}
+
+.wrap {
+  width: 80px;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+footer {
+  background-color: white;
+  height:80px;
+  text-align: center;
+}
+
+footer p{
+  background: #552b00;
+  width: 200px;
+  margin: auto auto;
+  padding: 5px;
+  text-align: center;
+  font-size: 75%;
+}
+footer p small{
+    color: #fff;
+    border: 1px #fff solid;
+    padding: 10px;
+    display: block;
+  }
+
+/*book/show*/
+.show_content{
+  width:100%;
+  background-color: #552b00;
+  text-align: center;
+}
+
+.show_book_container {
+  width: 70%;
+  height: 300px;
+  margin: 10px;
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+
+.comment_form {
+  width: auto;
+ display:inline;
+}
+
+.comments{
+  width: auto;
+ display:inline;
+}
+
+/*book/new*/
+.evaluation{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+.evaluation input[type='radio']{
+  display: none;
+}
+.evaluation label{
+  position: relative;
+  padding: 5px 5px 0;
+  color: gray;
+  cursor: pointer;
+  font-size: 50px;
+}
+.evaluation label .text{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: gray;
+}
+.evaluation label:hover,
+.evaluation label:hover ~ label,
+.evaluation input[type='radio']:checked ~ label{
+  color: #ffcc00;
+}
+
+/*login*/
+.field {
+  margin: 30px 30px;
+}
+.actions {
+  margin:10px 120px;
+}
+
