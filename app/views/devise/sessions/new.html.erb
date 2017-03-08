@@ -1,4 +1,12 @@
-<h2>Log in</h2>
+<h2 class="category_title">Log in</h2>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+  <div class="facebook">
+    <%= link_to user_facebook_omniauth_authorize_path do %><i class="fa fa-facebook" title="Facebook"></i><%=OmniAuth::Utils.camelize(provider)%>でログインする<% end %>
+ </div>
+  <% end -%>
+<% end -%>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">

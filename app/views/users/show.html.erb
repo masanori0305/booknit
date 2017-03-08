@@ -1,17 +1,72 @@
-<div class="contents clearfix">
- <h3><%= @nickname %>さんの投稿一覧</h3>
-  <% @books.each do |book| %>
-       <article class="book_container">
-          <div class="book_image"><img src=<%= book.image %> /></div>
-            <div class="text">
-            <a href="/books/<%=book.id%>}">
-              <h4><%= book.title %></h4>
-             </a>
-            <div class="wrap">
-                <h5>[満足度]</h5>
-              <span class="rate rate<%=book.rate%>"></span>
+<div class = "contents">
+<h2 class= category_title_mypage> <%= @name %>さんのPage</h2>
+
+<div class="row row-eq-height">
+  <div class="col-md-6">
+    <h3 class="user_book_bookshelf"> Bookshelf </h3>
+      <% @books.each do |book| %>
+       <div class  ="row row-eq-height" >
+        <div class="col-md-7 col-md-offset-3 col-sm-7 col-sm-offset-3 col-xs-7 col-xs-offset-3 book_container">
+         <div class = "row" >
+            <div class="col-md-4 book_image"><img src=<%= book.image %>>
             </div>
-             <p><%= book.review %> <a href="/books/<%=book.id%>">...続きを読む</a></p>
-       </article>
-    <%end%>
+            <div class="col-md-6 text">
+                <a href="/books/<%=book.id%>}">
+                      <h4><%= book.title %></h4>
+                </a>
+                <p>著者名：<%= book.author %><p>
+                <p>出版社：<%= book.publisher %><p>
+                <div class="wrap">
+                    <span class="rate rate<%=book.rate%>"></span>
+                </div>
+                  <p class=review_contents><%= book.review %></p>
+                  <a class = comment href="/books/<%=book.id%>"> More >> </a>
+            </div>
+            <div class="dropdown  col-md-1">
+           <% if user_signed_in? && current_user.id == book.user_id %>
+                 <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">MENU<span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-item"><%= link_to '編集', "/books/#{book.id}/edit", method: :get %></li>
+                      <li class="dropdown-item"><%= link_to '削除', "/books/#{book.id}", method: :delete %></li>
+                    </ul>
+            <% end %>
+             </div>
+            </div>
+         </div>
+        </div>
+      <% end %>
+  </div>
+
+  <div class = "col-md-6 ">
+    <h3 class= "user_book_bookmarks" > Bookmarks </h3>
+    <% @bookmarks.each do |book| %>
+       <div class  ="row row-eq-height" >
+        <div class="col-md-7 col-md-offset-2 col-sm-7 col-sm-offset-2 col-xs-7 col-xs-offset-2 book_container">
+           <div class = "row" >
+             <div class="col-md-4 book_image"><img src=<%= book.image %>>
+             </div>
+             <div class="col-md-6 text">
+                <a href="/books/<%=book.id%>}">
+                  <h4><%= book.title %></h4>
+                 </a>
+                   <p>著者名：<%= book.author %><p>
+                   <p>出版社：<%= book.publisher %><p>
+                   <i class="glyphicon glyphicon-user"></i><a href="/users/<%= book.user_id %>"><%= book.user.name %></a>
+                <div class="wrap">
+                  <span class="rate rate<%=book.rate%>"></span>
+                </div>
+               <p class=review_contents><%= book.review %></p>
+               <a class = comment href="/books/<%=book.id%>"> More >> </a>
+               <div class="book_amazon"><%= link_to"購入を検討>>","http://amazon.jp/gp/search?ie=UTF8&keywords=#{book.title}#{book.author}", target: "_blank" %>
+              </div>
+             </div>
+             <div id= "like-button<%= book.id %>", class="col-md-1 likes">
+                <%= render partial: "likes/like", locals: { book: book, like: book.likes.where(user_id: current_user.id).first } %>
+            </div>
+          </div>
+        </div>
+      </div>
+   <% end %>
+  </div>
+</div>
 </div>

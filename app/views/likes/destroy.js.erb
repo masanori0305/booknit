@@ -1,0 +1,2 @@
+$("#like-button<%= @book.id %>").html("<%= j(render partial: 'likes/like', locals: { book: @book, like: @book.likes.where(user_id: current_user.id).first}) %>");
+console.log("a")

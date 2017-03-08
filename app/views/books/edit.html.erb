@@ -1,0 +1,29 @@
+<div class="new_contents">
+<div>
+  <%= form_tag("/books/#{@book.id}", method: :patch) do %>
+    <h2 class=category_title>
+      Edit
+    </h2>
+    <ul style = "list-style:none" class = "col-md-4 col-md-offset-4">
+        <li><input class="new_post" placeholder="本のタイトル" type="text" name="title" value="<%= @book.title %>"></li>
+        <li><input class="new_post" placeholder="著者名" type="text" name="author" value="<%= @book.author %>"></li>
+        <li><input class="new_post" placeholder="出版社" type="text" name="publisher" value = "<%= @book.publisher %>"></li>
+        <li><input class="new_post" placeholder="Image Url" type="text" name="image" value = "<%= @book.image %>"></li>
+        <li class="evaluation">
+              <input id="star1" type="radio" name="star" value="5" />
+              <label for="star1"><span class="text"></span>★</label>
+              <input id="star2" type="radio" name="star" value="4" />
+              <label for="star2"><span class="text"></span>★</label>
+              <input id="star3" type="radio" name="star" value="3" />
+              <label for="star3"><span class="text"></span>★</label>
+              <input id="star4" type="radio" name="star" value="2" />
+              <label for="star4"><span class="text"></span>★</label>
+              <input id="star5" type="radio" name="star" value="1" />
+              <label for="star5"><span class="text"></span>★</label>
+        </li>
+        <li><textarea class = "review" cols="70" name="review" placeholder="要約・感想など" rows="10"><%= @book.review %></textarea></li>
+        <li><Button class = "button_type submit_button" type="submit">SEND</Button></li>
+    </ul>
+  <% end %>
+  </div>
+</div>

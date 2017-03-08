@@ -1,17 +1,44 @@
 <div>
-  <div>
-    <%= form_tag('/books/search', method: :get) do %>
-        <input id="keyword" placeholder="キーワードを打ち込んでください"%><button id = "button" title="検索" type="submit">検索</button>
-    <% end %>
-  </div>
-  <h2>検索結果</h2>
-    <div>
-    <%= @document['Items'].each do |item| %>
-    <ul>
-       <li> <%= item['Item']['title'] %> </li>
-       <li> <%= item['Item']['author'] %> </li>
-    </ul>
-    <% end %>
+  <h2 class=category_title>Search</h2>
+    <div class="search">
+        <%= form_tag('/books/search', method: :get) do %>
+        <input class = "input" style="width:300px;height:35px;" placeholder="本のタイトルを打ち込んでください" name = "keyword" ><button class="search_button button_type" title="search" type="submit"><span class="glyphicon glyphicon-search"></span>Search</button>
+        <% end %>
+        <a href="/books/new">本が見つからな人はこちら</a>
     </div>
-  </div>
 </div>
+
+<h2 class=category_title>Search Results</h2>
+<% if @items.present? %>
+  <div class="row row-eq-height">
+    <% @items.each do |item| %>
+
+      <div class="col-md-4 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1 book_container">
+        <div class = "row" >
+             <div class="col-md-4 book_image">
+                <%= image_tag item["Item"]["largeImageUrl"] %>
+             </div>
+             <div class="col-md-6 text">
+                     <h4> <%=link_to item["Item"]["title"], new_book_path(
+                        title: item["Item"]["title"],
+                        author: item["Item"]["author"],
+                        book_image: item["Item"]["mediumImageUrl"],
+                        publisher:  item["Item"]["publisherName"] )%></h4>
+                     <p> 著者名: <%= item["Item"]["author"] %> <p>
+                     <p> 出版社: <%= item["Item"]["publisherName"] %> <p>
+                     <p> 紹介文: <%= item["Item"]["itemCaption"] %> <p>
+             </div>
+
+
+
+            <%= link_to "", new_book_path(
+                        title: item["Item"]["title"],
+                        author: item["Item"]["author"],
+                        book_image: item["Item"]["mediumImageUrl"],
+                        publisher:  item["Item"]["publisherName"] ),
+                        class: "col-md-1 glyphicon glyphicon-chevron-right"%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

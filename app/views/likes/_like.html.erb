@@ -1,0 +1,16 @@
+<% if user_signed_in? %>
+  <% if book.like_user(current_user.id) %>
+    <%= link_to book_like_path(book_id: book.id, id: like.id), method: :delete, remote: true do %>
+       <%= image_tag("check_book.svg", :class => "like_image") %>
+     <% end %>
+     <p class=likes_count>(<%= book.likes_count %>)<p>
+  <% else %>
+    <%= link_to book_likes_path(book.id), method: :post, remote: true do %>
+    <%= image_tag("book.svg", :class => "like_image") %>
+    <% end %>
+        <p class=likes_count>(<%= book.likes_count %>)<p>
+  <% end %>
+<% else %>
+   <%= image_tag("book.svg", :class => "like_image") %>
+   <p class=likes_count>(<%= book.likes_count %>)<p>
+<% end %>

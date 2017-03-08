@@ -1,33 +1,33 @@
-
-  <div class="contents clearfix">
+<div class="contents">
   <h2 class= category_title> Timeline </h2>
-  <%= link_to "Sign in with Facebook yamashita", user_facebook_omniauth_callback_path(:facebook) %>
-  <% @books.each do |book| %>
-      <div class="books_container">
-         <article class="book_container">
-           <div class="book_image"><img src=<%= book.image %>></div>
-            <div class="text">
+  <div class="row row-eq-height">
+    <% @books.each do |book| %>
+      <div class="col-md-4 col-sm-5 col-sm-offset-1 col-xs-10 col-xs-offset-1 book_container">
+        <div class = "row" >
+          <div class="col-md-4 book_image"><img src=<%= book.image %>></div>
+          <div class="col-md-6 text">
             <a href="/books/<%=book.id%>}">
               <h4><%= book.title %></h4>
-             </a>
-              <div class="wrap">
-                <h5>[満足度]</h5>
-                  <span class="rate rate<%=book.rate%>"></span>
-              </div>
-              <p><%= book.review %> <a href="/books/<%=book.id%>">...続きを読む</a></p>
-              <p>by <a href="/users/<%=book.user.id%>"><%=book.user.nickname%></a></p>
+            </a>
+            <p>著者名：<%= book.author %><p>
+            <p>出版社：<%= book.publisher %><p>
+            <i class="glyphicon glyphicon-user"></i><a href="/users/<%= book.user_id %>"><%= book.user.name %></a>
+            <div class="wrap">
+              <span class="rate rate<%=book.rate%>"></span>
             </div>
-         </article>
-       </div>
-    <%end%>
+            <p class=review_contents><%= book.review %></p>
+            <a class = comment href="/books/<%=book.id%>"> Comment >> </a>
+            <div class="book_amazon"><%= link_to"購入を検討>>","http://amazon.jp/gp/search?ie=UTF8&keywords=#{book.title}#{book.author}", target: "_blank" %>
+            </div>
+          </div>
+          <div id= "like-button<%= book.id %>", class="col-md-1 likes">
+              <% if user_signed_in? %>
+                  <%= render partial: "likes/like", locals: { book: book, like: book.likes.where(user_id: current_user.id).first } %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-
-  <footer>
-   <p>
-     <small>
-        Copyright(C) BooKnit ALL RIGHTS RESERVED.
-    </small>
-   </p>
-  </footer>
-</body>
-</html>
+  <%= paginate(@books) %>
+</div>

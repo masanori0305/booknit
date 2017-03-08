@@ -1,29 +1,39 @@
-<div class="contents clearfix">
-  <article class="book_container">
-           <div class="book_image"><img src="<%= @book.image %>"></div>
-            <div class="text">
-              <h4><%= @book.title %></h4>
-              <p><%= @book.review %></p>
-              <p>by <a href="/users/<%=@book.user.id%>"><%=@book.user.nickname%></a></p>
+<h2 class= category_title> Book Details </h2>
+<div class="col-md-4 col-md-offset-4 book_container">
+  <div class = "row" >
+      <div class="col-md-4 book_image"><img src=<%= @book.image %>>
+      </div>
+      <div class="col-md-7 text">
+            <h4><%= @book.title %></h4>
+            <p>著者名：<%= @book.author %><p>
+            <p>出版社：<%= @book.publisher %><p>
+            <i class="glyphicon glyphicon-user"></i><a href="/users/<%= @book.user_id %>"><%= @book.user.name %></a>
+          <div class="wrap">
+            <span class="rate rate<%= @book.rate %>"></span>
+          </div>
+            <p class=review_detail_contents><%= @book.review %></p>
+            <div class="book_amazon"><%= link_to"購入を検討>>","http://amazon.jp/gp/search?ie=UTF8&keywords=#{@book.title}#{@book.author}", target: "_blank" %>
             </div>
-       </article>
-
-   <div class = "comment_form">
+      </div>
+  </div>
+</div>
+<div class="row">
+   <div class = "col-md-4 col-md-offset-4 comment_form">
     <% if current_user %>
       <%= form_tag("/books/#{@book.id}/comments", method: :post) do %>
-        <textarea cols="30" name="text" placeholder="コメントする" rows="2"></textarea>
-        <input type="submit" value="SENT">
-      <% end %>
+        <textarea class="textarea" cols="75" name="text" placeholder="コメントする" rows="5"></textarea>
+        <button class = "submit_button button_type" type="submit"> SEND </button>
+       <% end %>
     <% end %>
-  </div>
+   </div>
 
 
-  <div class = "comments">
+  <div class = "col-md-4 col-md-offset-4 comments">
       <h4>＜コメント一覧＞</h4>
       <% if @comments %>
         <% @comments.each do |comment| %>
           <p>
-            <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+            <strong><%= link_to comment.user.name, "/users/#{comment.user_id}" %>：</strong>
             <%= comment.text %>
           </p>
         <% end %>
